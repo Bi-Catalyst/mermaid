@@ -1,12 +1,12 @@
-name: mermaid Docker Image
+name: Mermaid Docker Image
 
 on:
   push:
-    branches: ["develop", "feature/**"]
-    tags: ["v*"]
+    branches: ['develop', 'feature/**']
+    tags: ['v*']
 
 env:
-    IMAGE_NAME: mermaind
+  IMAGE_NAME: mermaind
 
 jobs:
   push:
@@ -47,7 +47,3 @@ jobs:
           docker push $IMAGE_ID:$VERSION
 
           echo "Pushed $IMAGE_ID:$VERSION successfully"
-      # TODO
-      # Optional: Docker Layer Caching
-      # Note: You need to configure actions or services that support Docker layer caching.
-      # This is a placeholder for implementing Docker build caching to speed up builds.
