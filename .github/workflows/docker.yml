@@ -1,9 +1,9 @@
-name: Mermaid Docker Image
+name: 'Mermaid Docker Image'
 
 on:
   push:
-    branches: ['develop', 'feature/**']
-    tags: ['v*']
+    branches: [develop]
+    tags: [v*]
 
 env:
   IMAGE_NAME: mermaind
