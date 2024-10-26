@@ -11,6 +11,15 @@ export interface FlowVertex {
   styles: string[];
   text?: string;
   type?: string;
+  icon?: string;
+  form?: string;
+  pos?: 't' | 'b';
+  img?: string;
+  assetWidth?: number;
+  assetHeight?: number;
+  defaultWidth?: number;
+  imageAspectRatio?: number;
+  constraint?: 'on' | 'off';
 }
 
 export interface FlowText {
@@ -23,7 +32,7 @@ export interface FlowEdge {
   end: string;
   interpolate?: string;
   type?: string;
-  stroke?: string;
+  stroke?: 'normal' | 'thick' | 'invisible' | 'dotted';
   style?: string[];
   length?: number;
   text: string;
