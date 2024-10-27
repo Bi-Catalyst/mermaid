@@ -22,20 +22,23 @@ jobs:
         run: docker build --file Dockerfile --tag $IMAGE_NAME .
 
       # Logging into Docker registry using GitHub secrets for authentication
-      - name: Log into Docker registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
       # Tagging and pushing the image to the registry
       - name: Tag and push Docker images
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository }}/$IMAGE_NAME
-
+          # Convert repository name to lowercase for Docker tagging
+          REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_ID=$REPO_NAME/$IMAGE_NAME
           # Normalize the Docker image ID to lowercase for compatibility
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
           # Extracting version from the git tag or branch name
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-
           # Removing the 'v' prefix from version tags
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
 
