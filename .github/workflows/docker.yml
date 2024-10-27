@@ -36,9 +36,10 @@ jobs:
           REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           IMAGE_ID=ghcr.io/$REPO_NAME/${{ env.IMAGE_NAME }}
 
-          # Extract version or tag
+          # Extract version or branch name and strip 'v' prefix from tags
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            VERSION="${{ github.ref_name#v }}"
+            VERSION="${{ github.ref_name }}"
+            VERSION="${VERSION#v}" # Remove 'v' prefix if it exists
           else
             VERSION="${{ github.ref_name }}"
           fi
