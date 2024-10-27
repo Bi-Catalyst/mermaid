@@ -6,22 +6,22 @@ on:
     tags: [v*]
 
 env:
-  IMAGE_NAME: mermaind
+  IMAGE_NAME: mermaid
 
 jobs:
   push:
-    # This job runs after the code-quality checks pass
     runs-on: ubuntu-latest
     if: github.event_name == 'push' # This job is conditional on push events
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out the repository
+        uses: actions/checkout@v3
 
       # Building the Docker image from the Dockerfile
       - name: Build Docker image
-        run: docker build --file Dockerfile --tag $IMAGE_NAME .
+        run: docker build --file Dockerfile --tag ${{ env.IMAGE_NAME }} .
 
-      # Logging into Docker registry using GitHub secrets for authentication
+      # Logging into GitHub Container Registry
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
@@ -29,24 +29,25 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           
-      # Tagging and pushing the image to the registry
+      # Tagging and pushing the image to GHCR
       - name: Tag and push Docker images
         run: |
-          # Convert repository name to lowercase for Docker tagging
+          # Construct the image repository name in lowercase
           REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
-          IMAGE_ID=$REPO_NAME/$IMAGE_NAME
-          # Normalize the Docker image ID to lowercase for compatibility
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          # Extracting version from the git tag or branch name
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-          # Removing the 'v' prefix from version tags
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          IMAGE_ID=ghcr.io/$REPO_NAME/${{ env.IMAGE_NAME }}
 
-          # Using 'latest' tag for the main branch
-          [ "$VERSION" == "main" ] && VERSION=latest
+          # Extract version or tag
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            VERSION="${{ github.ref_name#v }}"
+          else
+            VERSION="${{ github.ref_name }}"
+          fi
 
-          # Tagging and pushing the Docker image
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          # Tag with 'latest' for main branch
+          [[ "$VERSION" == "main" ]] && VERSION="latest"
+
+          # Tag and push the Docker image
+          docker tag ${{ env.IMAGE_NAME }} $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
 
           echo "Pushed $IMAGE_ID:$VERSION successfully"
