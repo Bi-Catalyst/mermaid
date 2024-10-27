@@ -28,7 +28,7 @@ jobs:
       # Tagging and pushing the image to the registry
       - name: Tag and push Docker images
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$IMAGE_NAME
 
           # Normalize the Docker image ID to lowercase for compatibility
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
