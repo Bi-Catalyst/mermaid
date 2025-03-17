@@ -193,6 +193,7 @@ export interface MermaidConfig {
   requirement?: RequirementDiagramConfig;
   architecture?: ArchitectureDiagramConfig;
   mindmap?: MindmapDiagramConfig;
+  kanban?: KanbanDiagramConfig;
   gitGraph?: GitGraphDiagramConfig;
   c4?: C4DiagramConfig;
   sankey?: SankeyDiagramConfig;
@@ -716,6 +717,7 @@ export interface ClassDiagramConfig extends BaseDiagramConfig {
    */
   diagramPadding?: number;
   htmlLabels?: boolean;
+  hideEmptyMembersBox?: boolean;
 }
 /**
  * The object containing configurations specific for entity relationship diagrams
@@ -793,6 +795,8 @@ export interface ErDiagramConfig extends BaseDiagramConfig {
    *
    */
   entityPadding?: number;
+  nodeSpacing?: number;
+  rankSpacing?: number;
   /**
    * Stroke color of box edges and lines.
    */
@@ -1022,6 +1026,17 @@ export interface ArchitectureDiagramConfig extends BaseDiagramConfig {
 export interface MindmapDiagramConfig extends BaseDiagramConfig {
   padding?: number;
   maxNodeWidth?: number;
+}
+/**
+ * The object containing configurations specific for kanban diagrams
+ *
+ * This interface was referenced by `MermaidConfig`'s JSON-Schema
+ * via the `definition` "KanbanDiagramConfig".
+ */
+export interface KanbanDiagramConfig extends BaseDiagramConfig {
+  padding?: number;
+  sectionWidth?: number;
+  ticketBaseUrl?: string;
 }
 /**
  * This interface was referenced by `MermaidConfig`'s JSON-Schema

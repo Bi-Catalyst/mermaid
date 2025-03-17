@@ -44,6 +44,7 @@ To add an integration to this list, see the [Integrations - create page](./integ
 - [Deepdwn](https://billiam.itch.io/deepdwn) ✅
 - [Doctave](https://www.doctave.com/) ✅
   - [Mermaid in Markdown code blocks](https://docs.doctave.com/components/mermaid) ✅
+- [Forgejo](https://forgejo.org/) ✅
 - [GitBook](https://gitbook.com)
   - [Mermaid Plugin](https://github.com/JozoVilcek/gitbook-plugin-mermaid)
   - [Mermaid plugin for GitBook](https://github.com/wwformat/gitbook-plugin-mermaid-pdf)
@@ -69,6 +70,7 @@ To add an integration to this list, see the [Integrations - create page](./integ
 - [Notion](https://notion.so) ✅
 - [Observable](https://observablehq.com/@observablehq/mermaid) ✅
 - [Obsidian](https://help.obsidian.md/Editing+and+formatting/Advanced+formatting+syntax#Diagram) ✅
+- [Outline](https://docs.getoutline.com/s/guide/doc/diagrams-KQiKoT4wzK) ✅
 - [Redmine](https://redmine.org)
   - [Mermaid Macro](https://www.redmine.org/plugins/redmine_mermaid_macro)
   - [Markdown for mermaid plugin](https://github.com/jamieh-mongolian/markdown-for-mermaid-plugin)
@@ -99,8 +101,7 @@ Blogging frameworks and platforms
 - [Nextra](https://nextra.site/)
   - [Mermaid](https://nextra.site/docs/guide/mermaid)
 - [WordPress](https://wordpress.org)
-  - [WordPress Markdown Editor](https://wordpress.org/plugins/wp-githuber-md)
-  - [WP-ReliableMD](https://wordpress.org/plugins/wp-reliablemd/)
+  - [MerPRess](https://wordpress.org/plugins/merpress/)
 
 ### CMS/ECM
 
@@ -185,8 +186,6 @@ Communication tools and platforms
   - [=Diagram block](https://github.com/zag/podlite/tree/main/packages/podlite-diagrams)
 - [Standard Notes](https://standardnotes.com/)
   - [Mermaid Extension](https://github.com/nienow/sn-mermaid)
-- [Sublime Text 3](https://sublimetext.com)
-  - [Mermaid Package](https://packagecontrol.io/packages/Mermaid)
 - [VS Code](https://code.visualstudio.com/)
   - [Mermaid Editor](https://marketplace.visualstudio.com/items?itemName=tomoyukim.vscode-mermaid-editor)
   - [Mermaid Export](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.mermaid-export)
